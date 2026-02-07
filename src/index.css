@@ -1,0 +1,312 @@
+/* Y2K / Early Internet Aesthetic */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --neon-cyan: #00ff00;
+  --neon-pink: #39ff14;
+  --neon-green: #00ff00;
+  --neon-green-bright: #39ff14;
+  --neon-green-dim: #00cc00;
+  --neon-green-text: #33ff33;
+  --neon-yellow: #ccff00;
+  --neon-purple: #00cc00;
+  --dark-bg: #000000;
+  --dark-purple: #001a00;
+  --grid-color: #00ff0033;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto Mono', monospace;
+  background: var(--dark-bg);
+  color: var(--neon-green-text);
+  overflow-x: hidden;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="%2300ff00" opacity="0.6"/></svg>'), auto;
+}
+
+/* Animated gradient background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 50%, var(--dark-purple) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, #001100 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, #001a00 0%, transparent 50%);
+  animation: bgPulse 10s ease-in-out infinite;
+  z-index: -2;
+}
+
+/* VHS scan lines */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 0, 0.03) 0px,
+    rgba(0, 255, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanlines 8s linear infinite;
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(10px); }
+}
+
+@keyframes bgPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Glitch text effect */
+.glitch {
+  position: relative;
+  font-family: 'Space Mono', monospace;
+  font-size: 2.5rem;
+  color: var(--neon-green-bright);
+  text-shadow:
+    0 0 10px var(--neon-green-bright),
+    0 0 20px var(--neon-green-bright),
+    0 0 30px var(--neon-green-bright);
+  animation: glitch 3s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  color: var(--neon-green);
+  animation: glitchBefore 2s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  text-shadow: 2px 0 var(--neon-green);
+}
+
+.glitch::after {
+  color: var(--neon-green-dim);
+  animation: glitchAfter 3s infinite;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  text-shadow: -2px 0 var(--neon-green-dim);
+}
+
+@keyframes glitch {
+  0%, 90%, 100% { transform: translate(0); }
+  91% { transform: translate(-2px, 2px); }
+  92% { transform: translate(2px, -2px); }
+  93% { transform: translate(-2px, 2px); }
+  94% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitchBefore {
+  0%, 95%, 100% { transform: translate(0); }
+  96% { transform: translate(-5px, 0); }
+  97% { transform: translate(5px, 0); }
+}
+
+@keyframes glitchAfter {
+  0%, 93%, 100% { transform: translate(0); }
+  94% { transform: translate(5px, 0); }
+  95% { transform: translate(-5px, 0); }
+}
+
+/* Neon text */
+.neon-text {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  color: var(--neon-green-bright);
+  text-shadow:
+    0 0 5px var(--neon-green-bright),
+    0 0 10px var(--neon-green-bright),
+    0 0 20px var(--neon-green-bright),
+    0 0 40px var(--neon-green);
+  animation: flicker 4s infinite alternate;
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+      0 0 5px var(--neon-green-bright),
+      0 0 10px var(--neon-green-bright),
+      0 0 20px var(--neon-green-bright),
+      0 0 40px var(--neon-green);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+/* Retro buttons */
+button {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  padding: 15px 30px;
+  background: transparent;
+  color: var(--neon-green);
+  border: 3px solid var(--neon-green);
+  box-shadow:
+    0 0 10px var(--neon-green),
+    inset 0 0 10px rgba(0, 255, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--neon-green);
+  transition: left 0.5s ease;
+  z-index: -1;
+}
+
+button:hover::before {
+  left: 0;
+}
+
+button:hover {
+  color: var(--dark-bg);
+  box-shadow:
+    0 0 20px var(--neon-green),
+    0 0 40px var(--neon-green),
+    inset 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Retro links */
+a {
+  color: var(--neon-green);
+  text-decoration: none;
+  text-shadow: 0 0 5px var(--neon-green);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+a:hover {
+  color: var(--neon-yellow);
+  text-shadow: 0 0 10px var(--neon-yellow);
+}
+
+a::after {
+  content: '→';
+  position: absolute;
+  right: -20px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+a:hover::after {
+  right: -25px;
+  opacity: 1;
+}
+
+/* Retro container/box */
+.retro-box {
+  border: 2px solid var(--neon-green);
+  padding: 20px;
+  margin: 20px 0;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 0 10px var(--neon-green),
+    inset 0 0 20px rgba(0, 255, 0, 0.1);
+  position: relative;
+}
+
+.retro-box::before {
+  content: '▲';
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--dark-bg);
+  padding: 0 10px;
+  color: var(--neon-green);
+  font-size: 0.8rem;
+}
+
+/* Pixelated image effect */
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: contrast(1.2) saturate(1.5);
+}
+
+/* Grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+  border: 1px solid var(--neon-green);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-green);
+  box-shadow: 0 0 10px var(--neon-green);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-yellow);
+  box-shadow: 0 0 10px var(--neon-yellow);
+}
+
+/* Selection color */
+::selection {
+  background: var(--neon-green);
+  color: var(--dark-bg);
+}
+
+/* Blink animation for extra retro feel */
+.blink {
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}

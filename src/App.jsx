@@ -7,6 +7,7 @@ function App() {
     const saved = localStorage.getItem('darkMode')
     return saved ? JSON.parse(saved) : false
   })
+  const [showServices, setShowServices] = useState(false)
 
   useEffect(() => {
     // Simulate visitor counter
@@ -27,51 +28,69 @@ function App() {
     setDarkMode(!darkMode)
   }
 
+  const goToServices = () => {
+    setShowServices(true)
+    window.scrollTo(0, 0)
+  }
+
+  const backToPortfolio = () => {
+    setShowServices(false)
+    window.scrollTo(0, 0)
+  }
+
   return (
     <div className="app">
       {/* Navigation */}
       <nav className="nav">
         <div className="nav-logo">ANDREW.SABUDA</div>
-        <ul className="nav-links">
-          <li><a href="#home">HOME</a></li>
-          <li><a href="#about">ABOUT</a></li>
-          <li><a href="#projects">PROJECTS</a></li>
-          <li><a href="#skills">SKILLS</a></li>
-          <li><a href="#contact">CONTACT</a></li>
-        </ul>
+        {!showServices && (
+          <ul className="nav-links">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#projects">PROJECTS</a></li>
+            <li><a href="#skills">SKILLS</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+          </ul>
+        )}
         <button className="theme-toggle" onClick={toggleDarkMode} aria-label="Toggle theme">
           {darkMode ? '☀️' : '🌙'}
         </button>
       </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="hero grid-bg">
-        <div className="hero-profile-image">
-          <img
-            src="/profile-photo.jpeg"
-            alt="Andrew Sabuda"
-            className="profile-photo pixelated"
-          />
-        </div>
-        <p className="hero-description">
-          Software Engineer / Full Stack Developer
-          <br />
-          <span className="blink">▮</span> Building scalable apps with modern tech
-        </p>
-        <div className="hero-cta">
-          <button onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>
-            VIEW PROJECTS
-          </button>
-          <button onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
-            GET IN TOUCH
-          </button>
-        </div>
-        {/* <div className="visitor-counter">
-          👁️ VISITORS: {visitorCount.toLocaleString()} 👁️
-        </div> */}
-      </section>
+      {!showServices ? (
+        <>
+          {/* Portfolio View */}
+          {/* Hero Section */}
+          <section id="home" className="hero grid-bg">
+            <div className="hero-profile-image">
+              <img
+                src="/profile-photo.jpeg"
+                alt="Andrew Sabuda"
+                className="profile-photo pixelated"
+              />
+            </div>
+            <p className="hero-description">
+              Software Engineer / Full Stack Developer
+              <br />
+              <span className="blink">▮</span> Building scalable apps with modern tech
+            </p>
+            <div className="hero-cta">
+              <button onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>
+                VIEW PROJECTS
+              </button>
+              <button onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
+                GET IN TOUCH
+              </button>
+            </div>
 
-      {/* About Section */}
+            {/* Services Arrow */}
+            <div className="services-arrow" onClick={goToServices}>
+              <div className="arrow-text">Website Services</div>
+              <div className="arrow-icon">→</div>
+            </div>
+          </section>
+
+          {/* About Section */}
       <section id="about" className="section">
         <div className="section-content">
           <h2 className="section-title">[ ABOUT.ME ]</h2>
@@ -220,6 +239,113 @@ function App() {
           </div>
         </div>
       </section>
+        </>
+      ) : (
+        <>
+          {/* Services View */}
+          {/* Back Arrow */}
+          <div className="back-arrow" onClick={backToPortfolio}>
+            <div className="arrow-icon">←</div>
+            <div className="arrow-text">Back to Portfolio</div>
+          </div>
+
+          <section id="services" className="section" style={{ minHeight: '100vh', paddingTop: '120px' }}>
+            <div className="section-content">
+              <h2 className="section-title">[ WEBSITE.SERVICES ]</h2>
+
+              <div className="services-intro">
+                <h3 className="services-subtitle">Done-For-You Personal Website Setup & Hosting</h3>
+                <p className="services-description">
+                  I provide fully managed personal and portfolio websites designed for professionals, freelancers, creators,
+                  and small businesses who want a clean, fast website without the technical headaches.
+                </p>
+                <p className="services-description">
+                  Whether you need a brand-new site or want to move an existing website away from expensive or complex platforms
+                  (such as WordPress), I handle the entire process end-to-end:
+                </p>
+              </div>
+
+              <div className="services-features">
+                <ul className="services-list">
+                  <li>Website setup and deployment</li>
+                  <li>Domain connection and secure HTTPS configuration</li>
+                  <li>Migration of existing websites to lower-cost hosting</li>
+                  <li>Performance optimization for faster load times</li>
+                  <li>Ongoing hosting oversight and technical maintenance</li>
+                </ul>
+                <p className="services-note">
+                  Once your site is live, you won't need to manage plugins, hosting dashboards, updates, or security settings —
+                  everything is handled for you.
+                </p>
+              </div>
+
+              <div className="pricing-section">
+                <h3 className="pricing-title">Example Pricing</h3>
+
+                <div className="pricing-grid">
+                  <div className="pricing-card">
+                    <h4>Starter Portfolio Website</h4>
+                    <ul>
+                      <li>1-page professional website</li>
+                      <li>Mobile-optimized layout</li>
+                      <li>Domain connection and secure deployment</li>
+                    </ul>
+                    <div className="pricing-details">
+                      <p><strong>Setup:</strong> $199</p>
+                      <p><strong>Maintenance & hosting oversight (optional):</strong> $99/year</p>
+                    </div>
+                  </div>
+
+                  <div className="pricing-card">
+                    <h4>Professional Website</h4>
+                    <ul>
+                      <li>Up to 5 pages</li>
+                      <li>Contact form setup</li>
+                      <li>SEO-ready structure</li>
+                    </ul>
+                    <div className="pricing-details">
+                      <p><strong>Setup:</strong> $399</p>
+                      <p><strong>Maintenance:</strong> $149/year</p>
+                    </div>
+                  </div>
+
+                  <div className="pricing-card">
+                    <h4>Website Migration / Cost-Reduction Hosting</h4>
+                    <p className="migration-description">
+                      Already have a website? I can migrate it to a faster, lower-cost hosting setup while preserving
+                      your domain and content.
+                    </p>
+                    <div className="pricing-details">
+                      <p><strong>Migration starting at:</strong> $199</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="getting-started">
+                <h3 className="getting-started-title">Getting Started</h3>
+                <p>
+                  Before beginning, clients complete a short <strong>Project Intake Form</strong> (a quick requirements questionnaire)
+                  outlining:
+                </p>
+                <ul className="intake-list">
+                  <li>Website goals</li>
+                  <li>Desired pages or features</li>
+                  <li>Existing domain or hosting details (if applicable)</li>
+                  <li>Branding or content assets</li>
+                </ul>
+                <p className="timeline-note">
+                  This ensures your site can be planned, built, and launched quickly — most projects go live within
+                  <strong> 48–72 hours</strong> after receiving the required materials.
+                </p>
+                <p className="services-tagline">
+                  <strong>Simple websites. Lower long-term costs. Fully managed from domain to deployment.</strong>
+                </p>
+              </div>
+            </div>
+          </section>
+        </>
+      )}
 
       {/* Footer */}
       <footer className="footer">

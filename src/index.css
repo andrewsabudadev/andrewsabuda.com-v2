@@ -300,7 +300,6 @@ a:hover::after {
 
 /* Pixelated image effect */
 .pixelated {
-  image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
   filter: contrast(1.2) saturate(1.5);

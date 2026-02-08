@@ -418,3 +418,31 @@
     gap: 30px;
   }
 }
+
+/* Small devices (iPhone Pro, etc.) */
+@media (max-width: 480px) {
+  .hero {
+    padding: 70px 20px 10px;     
+  }
+
+  .hero-profile-image {
+    margin-top: 10px;        
+  }
+}
+
+/* Extra small devices (iPhone SE, etc.) */
+@media (max-width: 390px) {
+  .hero {
+    padding: 110px 10px 10px;
+  }
+
+  .hero-profile-image {
+  margin-top: 10px;
+  margin-bottom: 1px;
+  }
+
+  .profile-photo {
+    width: 60%;
+    height: 60%;
+  }
+}

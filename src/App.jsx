@@ -50,7 +50,7 @@ function App() {
           <img
             src="/profile-photo.jpeg"
             alt="Andrew Sabuda"
-            className="profile-photo"
+            className="profile-photo pixelated"
           />
         </div>
         <p className="hero-description">

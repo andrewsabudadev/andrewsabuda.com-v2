@@ -448,6 +448,12 @@
   text-align: center;
 }
 
+.services-profile-image {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
 .services-subtitle {
   font-family: 'Space Mono', monospace;
   font-size: 1.8rem;
@@ -493,18 +499,70 @@
   border-top: 1px solid var(--neon-green-dim);
 }
 
+#services,
+#process,
+#pricing {
+  scroll-margin-top: 100px;
+}
+
+.process-section {
+  margin: 60px 0;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.process-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.process-step {
+  background: var(--card-bg);
+  border: 2px solid var(--neon-green-dim);
+  border-left: 4px solid var(--neon-green);
+  padding: 25px;
+  transition: all 0.3s ease;
+}
+
+.process-step:hover {
+  border-color: var(--neon-green);
+  box-shadow: 0 0 10px var(--shadow-glow);
+  transform: translateX(5px);
+}
+
+.process-step h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.3rem;
+  color: var(--neon-green);
+  margin-bottom: 10px;
+  text-shadow: 0 0 2px var(--shadow-glow);
+}
+
+.process-step p {
+  color: var(--neon-green-text);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.process-tagline {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--neon-green);
+  margin-top: 30px;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 2px solid var(--neon-green);
+  border-radius: 10px;
+}
+
 .pricing-section {
   margin: 60px 0;
 }
 
-.pricing-title {
-  font-family: 'Space Mono', monospace;
-  font-size: 2rem;
-  color: var(--neon-green-bright);
-  text-align: center;
-  margin-bottom: 40px;
-  text-shadow: 0 0 2px var(--shadow-glow);
-}
 
 .pricing-grid {
   display: grid;
@@ -563,6 +621,10 @@
   font-size: 1.1rem;
 }
 
+#getting-started {
+  scroll-margin-top: 100px;
+}
+
 .getting-started {
   max-width: 800px;
   margin: 60px auto 0;
@@ -573,13 +635,6 @@
   box-shadow: 0 0 10px var(--shadow-glow);
 }
 
-.getting-started-title {
-  font-family: 'Space Mono', monospace;
-  font-size: 1.8rem;
-  color: var(--neon-green-bright);
-  margin-bottom: 20px;
-  text-shadow: 0 0 2px var(--shadow-glow);
-}
 
 .intake-list {
   list-style: none;
@@ -604,6 +659,28 @@
   text-align: center;
   font-size: 1.3rem;
   color: var(--neon-green);
+}
+
+.intake-button {
+  display: inline-block;
+  background: transparent;
+  color: var(--neon-green);
+  border: 2px solid var(--neon-green);
+  padding: 15px 30px;
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 0 5px var(--shadow-glow);
+}
+
+.intake-button:hover {
+  background: var(--neon-green);
+  color: var(--dark-bg);
+  box-shadow: 0 0 15px var(--shadow-glow);
+  transform: scale(1.05);
 }
 
 /* Under Construction Badge - Classic! */
@@ -672,18 +749,54 @@
     font-size: 1.5rem;
   }
 
-  .pricing-title {
-    font-size: 1.6rem;
-  }
-
   .services-features,
-  .getting-started {
+  .getting-started,
+  .process-section {
     padding: 20px;
   }
 
-  .services-arrow,
+  .process-step {
+    padding: 20px;
+  }
+
+  .process-step h4 {
+    font-size: 1.1rem;
+  }
+
+  .process-step p {
+    font-size: 1rem;
+  }
+
+  .intake-button {
+    font-size: 0.9rem;
+    padding: 12px 25px;
+  }
+
+  .services-arrow {
+    right: 20px;
+    gap: 8px;
+  }
+
+  .services-arrow:hover {
+    right: 15px;
+  }
+
   .back-arrow {
-    display: none;
+    left: 20px;
+    gap: 8px;
+  }
+
+  .back-arrow:hover {
+    left: 15px;
+  }
+
+  .arrow-text {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+  }
+
+  .arrow-icon {
+    font-size: 1.5rem;
   }
 }
 

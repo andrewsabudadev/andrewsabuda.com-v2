@@ -2,18 +2,13 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [visitorCount, setVisitorCount] = useState(0)
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode')
     return saved ? JSON.parse(saved) : false
   })
-  const [showServices, setShowServices] = useState(false)
-
-  useEffect(() => {
-    // Simulate visitor counter
-    const count = Math.floor(Math.random() * 99999) + 10000
-    setVisitorCount(count)
-  }, [])
+  const [showServices, setShowServices] = useState(() => {
+    return window.location.pathname === '/services'
+  })
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode))
@@ -24,17 +19,28 @@ function App() {
     }
   }, [darkMode])
 
+  useEffect(() => {
+    const handlePopState = () => {
+      setShowServices(window.location.pathname === '/services')
+    }
+
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
   }
 
   const goToServices = () => {
     setShowServices(true)
+    window.history.pushState({}, '', '/services')
     window.scrollTo(0, 0)
   }
 
   const backToPortfolio = () => {
     setShowServices(false)
+    window.history.pushState({}, '', '/')
     window.scrollTo(0, 0)
   }
 
@@ -50,6 +56,14 @@ function App() {
             <li><a href="#projects">PROJECTS</a></li>
             <li><a href="#skills">SKILLS</a></li>
             <li><a href="#contact">CONTACT</a></li>
+          </ul>
+        )}
+        {showServices && (
+          <ul className="nav-links">
+            <li><a href="#services">SERVICES</a></li>
+            <li><a href="#process">PROCESS</a></li>
+            <li><a href="#pricing">PRICING</a></li>
+            <li><a href="#getting-started">GET STARTED</a></li>
           </ul>
         )}
         <button className="theme-toggle" onClick={toggleDarkMode} aria-label="Toggle theme">
@@ -246,14 +260,21 @@ function App() {
           {/* Back Arrow */}
           <div className="back-arrow" onClick={backToPortfolio}>
             <div className="arrow-icon">←</div>
-            <div className="arrow-text">Back to Portfolio</div>
+            <div className="arrow-text">Portfolio</div>
           </div>
 
-          <section id="services" className="section" style={{ minHeight: '100vh', paddingTop: '120px' }}>
+          <section id="services" className="section grid-bg" style={{ minHeight: '100vh', paddingTop: '120px' }}>
             <div className="section-content">
-              <h2 className="section-title">[ WEBSITE.SERVICES ]</h2>
+              <h2 className="section-title">[ SERVICES ]</h2>
 
               <div className="services-intro">
+                <div className="services-profile-image">
+                  <img
+                    src="/profile-photo.jpeg"
+                    alt="Andrew Sabuda"
+                    className="profile-photo pixelated"
+                  />
+                </div>
                 <h3 className="services-subtitle">Done-For-You Personal Website Setup & Hosting</h3>
                 <p className="services-description">
                   I provide fully managed personal and portfolio websites designed for professionals, freelancers, creators,
@@ -279,8 +300,53 @@ function App() {
                 </p>
               </div>
 
-              <div className="pricing-section">
-                <h3 className="pricing-title">Example Pricing</h3>
+              <div id="process" className="process-section">
+                <h2 className="section-title">[ MY.PROCESS ]</h2>
+
+                <div className="process-steps">
+                  <div className="process-step">
+                    <h4>Project Intake</h4>
+                    <p>
+                      Fill out a short form with your goals, content, and any existing site info. This helps me plan your site quickly.
+                    </p>
+                  </div>
+
+                  <div className="process-step">
+                    <h4>50% Deposit</h4>
+                    <p>
+                      A deposit secures your project and lets me start building your website.
+                    </p>
+                  </div>
+
+                  <div className="process-step">
+                    <h4>Preview & Review</h4>
+                    <p>
+                      I'll share a preview via screenshots, screen share, or staging link. You can review and request minor tweaks before anything goes live.
+                    </p>
+                  </div>
+
+                  <div className="process-step">
+                    <h4>Final Payment & Deployment</h4>
+                    <p>
+                      Once you approve, the remaining 50% is due. I then deploy your site to your domain with secure HTTPS and fully functioning hosting.
+                    </p>
+                  </div>
+
+                  <div className="process-step">
+                    <h4>Optional Maintenance</h4>
+                    <p>
+                      I can manage hosting and updates for you, keeping your site secure and hassle-free year after year.
+                    </p>
+                  </div>
+                </div>
+
+                <p className="process-tagline">
+                  <strong>Simple. Fast. Fully managed.</strong> You only pay the final balance when you've approved your site.
+                </p>
+              </div>
+
+              <div id="pricing" className="pricing-section">
+                <h2 className="section-title">[ PRICING ]</h2>
 
                 <div className="pricing-grid">
                   <div className="pricing-card">
@@ -322,25 +388,39 @@ function App() {
                 </div>
               </div>
 
-              <div className="getting-started">
-                <h3 className="getting-started-title">Getting Started</h3>
-                <p>
-                  Before beginning, clients complete a short <strong>Project Intake Form</strong> (a quick requirements questionnaire)
-                  outlining:
-                </p>
+              <div id="getting-started">
+                <h2 className="section-title">[ GET.STARTED ]</h2>
+                <div className="getting-started">
+                  <p>
+                    Before beginning, clients complete a short <strong>Project Intake Form</strong> (a quick requirements questionnaire)
+                    outlining:
+                  </p>
                 <ul className="intake-list">
                   <li>Website goals</li>
                   <li>Desired pages or features</li>
                   <li>Existing domain or hosting details (if applicable)</li>
                   <li>Branding or content assets</li>
                 </ul>
+                <p style={{ marginTop: '20px', textAlign: 'center', fontSize: '1.1rem' }}>
+                  To get started, email me at <strong>andrewsabuda@gmail.com</strong> with the subject line{' '}
+                  <strong>"Website Build Inquiry"</strong>, or click the button below:
+                </p>
+                <div style={{ textAlign: 'center', margin: '20px 0' }}>
+                  <a
+                    href="mailto:andrewsabuda@gmail.com?subject=Website%20Build%20Inquiry"
+                    className="intake-button"
+                  >
+                    Submit Intake Form via Email
+                  </a>
+                </div>
                 <p className="timeline-note">
-                  This ensures your site can be planned, built, and launched quickly — most projects go live within
-                  <strong> 48–72 hours</strong> after receiving the required materials.
+                  This ensures your site can be planned, built, and launched quickly. Most projects go live within
+                  <strong> 48–72 hours</strong> after project approval and receipt of initial payment.
                 </p>
                 <p className="services-tagline">
                   <strong>Simple websites. Lower long-term costs. Fully managed from domain to deployment.</strong>
                 </p>
+                </div>
               </div>
             </div>
           </section>
@@ -355,7 +435,7 @@ function App() {
           </div>
         </div>
         <p className="footer-text" style={{ marginTop: '20px', fontSize: '1rem' }}>
-          © 2026 Andrew Sabuda. Best viewed in 1024x768.
+          © 2026 Andrew Sabuda
         </p>
       </footer>
     </div>

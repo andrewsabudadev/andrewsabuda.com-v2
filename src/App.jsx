@@ -3,12 +3,29 @@ import './App.css'
 
 function App() {
   const [visitorCount, setVisitorCount] = useState(0)
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode')
+    return saved ? JSON.parse(saved) : false
+  })
 
   useEffect(() => {
     // Simulate visitor counter
     const count = Math.floor(Math.random() * 99999) + 10000
     setVisitorCount(count)
   }, [])
+
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode))
+    if (darkMode) {
+      document.documentElement.setAttribute('data-theme', 'dark')
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light')
+    }
+  }, [darkMode])
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode)
+  }
 
   return (
     <div className="app">
@@ -22,6 +39,9 @@ function App() {
           <li><a href="#skills">SKILLS</a></li>
           <li><a href="#contact">CONTACT</a></li>
         </ul>
+        <button className="theme-toggle" onClick={toggleDarkMode} aria-label="Toggle theme">
+          {darkMode ? '☀️' : '🌙'}
+        </button>
       </nav>
 
       {/* Hero Section */}
@@ -132,7 +152,8 @@ function App() {
                 <li>JavaScript</li>
                 <li>Material UI</li>
                 <li>Tailwind</li>
-                <li>Angular/AngularJS</li>
+                <li>Angular</li>
+                <li>AngularJS</li>
               </ul>
             </div>
 

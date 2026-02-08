@@ -14,18 +14,34 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--nav-bg);
   border-bottom: 2px solid var(--neon-green);
-  box-shadow: 0 5px 20px rgba(0, 255, 0, 0.3);
+  box-shadow: 0 5px 20px var(--shadow-glow);
   backdrop-filter: blur(10px);
   z-index: 1000;
+  gap: 20px;
+}
+
+.theme-toggle {
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  background: transparent;
+  border: 2px solid var(--neon-green);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--shadow-glow);
 }
 
 .nav-logo {
   font-family: 'Space Mono', monospace;
   font-size: 1.2rem;
   color: var(--neon-green-bright);
-  text-shadow: 0 0 10px var(--neon-green-bright);
+  text-shadow: 0 0 2px var(--shadow-glow);
 }
 
 .nav-links {
@@ -45,7 +61,7 @@
 
 .nav-links a:hover {
   border: 1px solid var(--neon-green-bright);
-  box-shadow: 0 0 10px var(--neon-green-bright);
+  box-shadow: 0 0 5px var(--shadow-glow);
   color: var(--neon-green-bright);
 }
 
@@ -75,8 +91,8 @@
   border-radius: 50%;
   border: 4px solid var(--neon-green);
   box-shadow:
-    0 0 20px var(--neon-green),
-    0 0 40px var(--neon-green);
+    0 0 10px var(--shadow-glow),
+    0 0 20px var(--shadow-glow);
   animation: float 3s ease-in-out infinite;
   object-fit: cover;
   transition: all 0.3s ease;
@@ -84,8 +100,8 @@
 
 .profile-photo:hover {
   box-shadow:
-    0 0 30px var(--neon-green-bright),
-    0 0 60px var(--neon-green-bright);
+    0 0 15px var(--shadow-glow),
+    0 0 30px var(--shadow-glow);
   transform: scale(1.05);
 }
 
@@ -139,9 +155,7 @@
   text-align: center;
   margin-bottom: 60px;
   text-shadow:
-    0 0 10px var(--neon-green-bright),
-    0 0 20px var(--neon-green-bright),
-    0 0 30px var(--neon-green);
+    0 0 5px var(--shadow-glow);
 }
 
 .section-content {
@@ -161,7 +175,7 @@
   width: 100%;
   max-width: 300px;
   border: 3px solid var(--neon-green);
-  box-shadow: 0 0 20px var(--neon-green);
+  box-shadow: 0 0 10px var(--shadow-glow);
   animation: float 3s ease-in-out infinite;
 }
 
@@ -187,7 +201,7 @@
 .project-card {
   border: 2px solid var(--neon-green);
   padding: 20px;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--card-bg);
   transition: all 0.3s ease;
   cursor: pointer;
 }
@@ -195,8 +209,8 @@
 .project-card:hover {
   transform: translateY(-10px) scale(1.02);
   box-shadow:
-    0 0 20px var(--neon-green-bright),
-    inset 0 0 20px rgba(0, 255, 0, 0.2);
+    0 0 15px var(--shadow-glow),
+    inset 0 0 20px var(--shadow-glow);
   border-color: var(--neon-yellow);
 }
 
@@ -205,7 +219,7 @@
   font-size: 1rem;
   color: var(--neon-green);
   margin-bottom: 15px;
-  text-shadow: 0 0 10px var(--neon-green);
+  text-shadow: 0 0 2px var(--shadow-glow);
 }
 
 .project-description {
@@ -227,7 +241,7 @@
   border: 1px solid var(--neon-green-dim);
   color: var(--neon-green-text);
   font-size: 0.9rem;
-  text-shadow: 0 0 5px var(--neon-green-dim);
+  text-shadow: 0 0 2px var(--shadow-glow);
   transition: all 0.3s ease;
 }
 
@@ -246,13 +260,13 @@
 .skill-category {
   border: 2px solid var(--neon-green-dim);
   padding: 20px;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--card-bg);
   transition: all 0.3s ease;
 }
 
 .skill-category:hover {
   border-color: var(--neon-green);
-  box-shadow: 0 0 15px var(--neon-green-dim);
+  box-shadow: 0 0 10px var(--shadow-glow);
 }
 
 .skill-category h3 {
@@ -261,7 +275,7 @@
   color: var(--neon-green);
   margin-bottom: 20px;
   text-align: center;
-  text-shadow: 0 0 10px var(--neon-green);
+  text-shadow: 0 0 2px var(--shadow-glow);
 }
 
 .skill-list {
@@ -300,13 +314,13 @@
   font-size: 1.5rem;
   transition: all 0.3s ease;
   color: var(--neon-green);
-  text-shadow: 0 0 5px var(--neon-green);
+  text-shadow: 0 0 2px var(--shadow-glow);
 }
 
 .contact-link:hover {
   transform: scale(1.1);
   color: var(--neon-green-bright);
-  text-shadow: 0 0 10px var(--neon-green-bright);
+  text-shadow: 0 0 5px var(--shadow-glow);
 }
 
 .contact-icon {
@@ -318,7 +332,7 @@
   padding: 40px;
   text-align: center;
   border-top: 2px solid var(--neon-green);
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--footer-bg);
   font-size: 1.2rem;
 }
 
@@ -354,12 +368,12 @@
   padding: 10px 20px;
   background: repeating-linear-gradient(
     45deg,
-    #000,
-    #000 10px,
-    #ffff00 10px,
-    #ffff00 20px
+    #ffffff,
+    #ffffff 10px,
+    #000000 10px,
+    #000000 20px
   );
-  border: 3px solid var(--neon-yellow);
+  border: 3px solid var(--neon-green);
   color: #000;
   font-family: 'Space Mono', monospace;
   font-size: 0.7rem;

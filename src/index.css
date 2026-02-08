@@ -6,7 +6,35 @@
   box-sizing: border-box;
 }
 
-:root {
+/* Light mode (default) */
+:root,
+[data-theme="light"] {
+  --neon-cyan: #000000;
+  --neon-pink: #333333;
+  --neon-green: #000000;
+  --neon-green-bright: #1a1a1a;
+  --neon-green-dim: #4a4a4a;
+  --neon-green-text: #2a2a2a;
+  --neon-yellow: #666666;
+  --neon-purple: #555555;
+  --dark-bg: #ffffff;
+  --dark-purple: #f5f5f5;
+  --grid-color: #00000011;
+  --bg-gradient-1: #f5f5f5;
+  --bg-gradient-2: #f0f0f0;
+  --bg-gradient-3: #fafafa;
+  --glow-color-1: rgba(200, 200, 200, 0.3);
+  --glow-color-2: rgba(220, 220, 220, 0.2);
+  --scan-line-color: rgba(0, 0, 0, 0.02);
+  --shadow-glow: rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(245, 245, 245, 0.6);
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --footer-bg: rgba(245, 245, 245, 0.8);
+  --cursor-color: %23000000;
+}
+
+/* Dark mode */
+[data-theme="dark"] {
   --neon-cyan: #00ff00;
   --neon-pink: #39ff14;
   --neon-green: #00ff00;
@@ -18,6 +46,17 @@
   --dark-bg: #000000;
   --dark-purple: #001a00;
   --grid-color: #00ff0033;
+  --bg-gradient-1: #001a00;
+  --bg-gradient-2: #001100;
+  --bg-gradient-3: #001a00;
+  --glow-color-1: rgba(57, 255, 20, 0.3);
+  --glow-color-2: rgba(0, 255, 0, 0.2);
+  --scan-line-color: rgba(0, 255, 0, 0.03);
+  --shadow-glow: rgba(0, 255, 0, 0.3);
+  --card-bg: rgba(0, 0, 0, 0.6);
+  --nav-bg: rgba(0, 0, 0, 0.8);
+  --footer-bg: rgba(0, 0, 0, 0.8);
+  --cursor-color: %2300ff00;
 }
 
 body {
@@ -26,6 +65,16 @@ body {
   background: var(--dark-bg);
   color: var(--neon-green-text);
   overflow-x: hidden;
+}
+
+/* Custom cursor with theme-aware color */
+body,
+body * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="%23000000" opacity="0.3"/></svg>'), auto;
+}
+
+[data-theme="dark"] body,
+[data-theme="dark"] body * {
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="%2300ff00" opacity="0.6"/></svg>'), auto;
 }
 
@@ -39,8 +88,8 @@ body::before {
   height: 100%;
   background:
     radial-gradient(circle at 20% 50%, var(--dark-purple) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, #001100 0%, transparent 50%),
-    radial-gradient(circle at 40% 20%, #001a00 0%, transparent 50%);
+    radial-gradient(circle at 80% 80%, var(--bg-gradient-2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, var(--bg-gradient-3) 0%, transparent 50%);
   animation: bgPulse 10s ease-in-out infinite;
   z-index: -2;
 }
@@ -55,8 +104,8 @@ body::after {
   height: 100%;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 255, 0, 0.03) 0px,
-    rgba(0, 255, 0, 0.03) 1px,
+    var(--scan-line-color) 0px,
+    var(--scan-line-color) 1px,
     transparent 1px,
     transparent 2px
   );
@@ -82,9 +131,8 @@ body::after {
   font-size: 2.5rem;
   color: var(--neon-green-bright);
   text-shadow:
-    0 0 10px var(--neon-green-bright),
-    0 0 20px var(--neon-green-bright),
-    0 0 30px var(--neon-green-bright);
+    0 0 5px var(--shadow-glow),
+    0 0 10px var(--shadow-glow);
   animation: glitch 3s infinite;
 }
 
@@ -102,14 +150,14 @@ body::after {
   color: var(--neon-green);
   animation: glitchBefore 2s infinite;
   clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-  text-shadow: 2px 0 var(--neon-green);
+  text-shadow: 2px 0 var(--shadow-glow);
 }
 
 .glitch::after {
   color: var(--neon-green-dim);
   animation: glitchAfter 3s infinite;
   clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-  text-shadow: -2px 0 var(--neon-green-dim);
+  text-shadow: -2px 0 var(--shadow-glow);
 }
 
 @keyframes glitch {
@@ -138,20 +186,16 @@ body::after {
   font-weight: 900;
   color: var(--neon-green-bright);
   text-shadow:
-    0 0 5px var(--neon-green-bright),
-    0 0 10px var(--neon-green-bright),
-    0 0 20px var(--neon-green-bright),
-    0 0 40px var(--neon-green);
+    0 0 5px var(--shadow-glow),
+    0 0 10px var(--shadow-glow);
   animation: flicker 4s infinite alternate;
 }
 
 @keyframes flicker {
   0%, 18%, 22%, 25%, 53%, 57%, 100% {
     text-shadow:
-      0 0 5px var(--neon-green-bright),
-      0 0 10px var(--neon-green-bright),
-      0 0 20px var(--neon-green-bright),
-      0 0 40px var(--neon-green);
+      0 0 5px var(--shadow-glow),
+      0 0 10px var(--shadow-glow);
   }
   20%, 24%, 55% {
     text-shadow: none;
@@ -167,8 +211,8 @@ button {
   color: var(--neon-green);
   border: 3px solid var(--neon-green);
   box-shadow:
-    0 0 10px var(--neon-green),
-    inset 0 0 10px rgba(0, 255, 0, 0.2);
+    0 0 5px var(--shadow-glow),
+    inset 0 0 10px var(--shadow-glow);
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
@@ -195,9 +239,9 @@ button:hover::before {
 button:hover {
   color: var(--dark-bg);
   box-shadow:
-    0 0 20px var(--neon-green),
-    0 0 40px var(--neon-green),
-    inset 0 0 20px rgba(0, 255, 0, 0.5);
+    0 0 10px var(--shadow-glow),
+    0 0 20px var(--shadow-glow),
+    inset 0 0 20px var(--shadow-glow);
 }
 
 button:active {
@@ -208,14 +252,14 @@ button:active {
 a {
   color: var(--neon-green);
   text-decoration: none;
-  text-shadow: 0 0 5px var(--neon-green);
+  text-shadow: 0 0 2px var(--shadow-glow);
   transition: all 0.3s ease;
   position: relative;
 }
 
 a:hover {
   color: var(--neon-yellow);
-  text-shadow: 0 0 10px var(--neon-yellow);
+  text-shadow: 0 0 5px var(--shadow-glow);
 }
 
 a::after {
@@ -236,10 +280,10 @@ a:hover::after {
   border: 2px solid var(--neon-green);
   padding: 20px;
   margin: 20px 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--card-bg);
   box-shadow:
-    0 0 10px var(--neon-green),
-    inset 0 0 20px rgba(0, 255, 0, 0.1);
+    0 0 5px var(--shadow-glow),
+    inset 0 0 20px var(--shadow-glow);
   position: relative;
 }
 
@@ -288,12 +332,12 @@ a:hover::after {
 
 ::-webkit-scrollbar-thumb {
   background: var(--neon-green);
-  box-shadow: 0 0 10px var(--neon-green);
+  box-shadow: 0 0 5px var(--shadow-glow);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--neon-yellow);
-  box-shadow: 0 0 10px var(--neon-yellow);
+  box-shadow: 0 0 10px var(--shadow-glow);
 }
 
 /* Selection color */

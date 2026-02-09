@@ -9,6 +9,7 @@ function App() {
   const [showServices, setShowServices] = useState(() => {
     return window.location.pathname === '/services'
   })
+  const [formStatus, setFormStatus] = useState('')
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode))
@@ -42,6 +43,32 @@ function App() {
     setShowServices(false)
     window.history.pushState({}, '', '/')
     window.scrollTo(0, 0)
+  }
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault()
+    const form = e.target
+    const formData = new FormData(form)
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+
+      if (response.ok) {
+        setFormStatus('success')
+        form.reset()
+        setTimeout(() => setFormStatus(''), 5000)
+      } else {
+        setFormStatus('error')
+      }
+    } catch (error) {
+      setFormStatus('error')
+    }
   }
 
   return (
@@ -398,7 +425,7 @@ function App() {
                 <h2 className="section-title">[ GET.STARTED ]</h2>
                 <div className="getting-started">
                   <p>
-                    Before beginning, clients complete a short <strong>Project Intake Form</strong> (a quick requirements questionnaire)
+                    Before beginning, please complete a short <strong>Project Intake Form </strong> 
                     outlining:
                   </p>
                 <ul className="intake-list">
@@ -408,20 +435,206 @@ function App() {
                   <li>Branding or content assets</li>
                 </ul>
                 <p style={{ marginTop: '20px', textAlign: 'center', fontSize: '1.1rem' }}>
-                  To get started, email me at <strong>andrewsabuda@gmail.com</strong> with the subject line{' '}
-                  <strong>"Website Build Inquiry"</strong>, or click the button below:
+                  Email me at <strong>andrewsabuda@gmail.com</strong> with the subject <strong>"Website Build Inquiry" </strong>
                 </p>
-                <div style={{ textAlign: 'center', margin: '20px 0' }}>
-                  <a
-                    href="mailto:andrewsabuda@gmail.com?subject=Website%20Build%20Inquiry"
-                    className="intake-button"
+                <p style={{ marginTop: '20px', textAlign: 'center', fontSize: '1.1rem' }}>
+                  Or use the form below:
+                </p>
+                {/* Project Intake Form */}
+                <div className="intake-form-container" style={{ maxWidth: '600px', margin: '30px auto' }}>
+                  <form
+                    action="https://formspree.io/f/mdalkalz"
+                    method="POST"
+                    onSubmit={handleFormSubmit}
+                    className="retro-box"
+                    style={{ padding: '30px' }}
                   >
-                    Submit Intake Form via Email
-                  </a>
+                    <div style={{ marginBottom: '20px' }}>
+                      <label htmlFor="name" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold' }}>
+                        Name *
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        style={{
+                          width: '100%',
+                          padding: '10px',
+                          fontSize: '1rem',
+                          border: '2px solid var(--neon-green)',
+                          background: 'var(--bg-dark)',
+                          color: 'var(--text-light)',
+                          fontFamily: 'monospace'
+                        }}
+                      />
+                    </div>
+
+                    <div style={{ marginBottom: '20px' }}>
+                      <label htmlFor="email" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold' }}>
+                        Email *
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        title="Please enter a valid email address (e.g., name@example.com)"
+                        style={{
+                          width: '100%',
+                          padding: '10px',
+                          fontSize: '1rem',
+                          border: '2px solid var(--neon-green)',
+                          background: 'var(--bg-dark)',
+                          color: 'var(--text-light)',
+                          fontFamily: 'monospace'
+                        }}
+                      />
+                    </div>
+
+                    <div style={{ marginBottom: '20px' }}>
+                      <label htmlFor="phone" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold' }}>
+                        Phone *
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        required
+                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        title="Please enter a valid 10-digit phone number"
+                        placeholder="123-456-7890"
+                        inputMode="numeric"
+                        onKeyDown={(e) => {
+                          // Handle backspace on dashes
+                          if (e.key === 'Backspace') {
+                            const value = e.target.value;
+                            const cursorPos = e.target.selectionStart;
+                            if (cursorPos > 0 && value[cursorPos - 1] === '-') {
+                              e.preventDefault();
+                              const newValue = value.slice(0, cursorPos - 2) + value.slice(cursorPos);
+                              e.target.value = newValue;
+                              e.target.setSelectionRange(cursorPos - 1, cursorPos - 1);
+                              // Trigger input event to reformat
+                              e.target.dispatchEvent(new Event('input', { bubbles: true }));
+                            }
+                          }
+                        }}
+                        onInput={(e) => {
+                          // Get cursor position before formatting
+                          const cursorPos = e.target.selectionStart;
+                          const oldLength = e.target.value.length;
+
+                          // Remove all non-numeric characters
+                          let value = e.target.value.replace(/\D/g, '');
+
+                          // Limit to 10 digits
+                          if (value.length > 10) {
+                            value = value.slice(0, 10);
+                          }
+
+                          // Format as XXX-XXX-XXXX
+                          let formatted = '';
+                          if (value.length >= 6) {
+                            formatted = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6);
+                          } else if (value.length >= 3) {
+                            formatted = value.slice(0, 3) + '-' + value.slice(3);
+                          } else {
+                            formatted = value;
+                          }
+
+                          e.target.value = formatted;
+
+                          // Restore cursor position
+                          const newLength = formatted.length;
+                          if (newLength > oldLength) {
+                            e.target.setSelectionRange(cursorPos + 1, cursorPos + 1);
+                          }
+                        }}
+                        style={{
+                          width: '100%',
+                          padding: '10px',
+                          fontSize: '1rem',
+                          border: '2px solid var(--neon-green)',
+                          background: 'var(--bg-dark)',
+                          color: 'var(--text-light)',
+                          fontFamily: 'monospace'
+                        }}
+                      />
+                    </div>
+
+                    <div style={{ marginBottom: '20px' }}>
+                      <label htmlFor="projectType" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold' }}>
+                        Project Type *
+                      </label>
+                      <select
+                        id="projectType"
+                        name="projectType"
+                        required
+                        style={{
+                          width: '100%',
+                          padding: '10px',
+                          fontSize: '1rem',
+                          border: '2px solid var(--neon-green)',
+                          background: 'var(--bg-dark)',
+                          color: 'var(--text-light)',
+                          fontFamily: 'monospace'
+                        }}
+                      >
+                        <option value="" disabled>Select one...</option>
+                        <option value="starter">Starter Portfolio Website</option>
+                        <option value="professional">Professional Website (up to 5 pages)</option>
+                        <option value="migration">Website Migration</option>
+                        <option value="other">Other / Not Sure</option>
+                      </select>
+                    </div>
+
+                    <div style={{ marginBottom: '20px' }}>
+                      <label htmlFor="websiteGoals" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold' }}>
+                        Website Goals & Details *
+                      </label>
+                      <textarea
+                        id="websiteGoals"
+                        name="websiteGoals"
+                        required
+                        rows="6"
+                        placeholder="Tell me about your project: goals, desired features, existing domain/website, timeline, etc."
+                        style={{
+                          width: '100%',
+                          padding: '10px',
+                          fontSize: '1rem',
+                          border: '2px solid var(--neon-green)',
+                          background: 'var(--bg-dark)',
+                          color: 'var(--text-light)',
+                          fontFamily: 'monospace',
+                          resize: 'vertical'
+                        }}
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="intake-button"
+                      style={{ width: '100%', marginTop: '10px' }}
+                    >
+                      Submit Project Inquiry
+                    </button>
+
+                    {formStatus === 'success' && (
+                      <p style={{ marginTop: '15px', color: 'var(--neon-green)', textAlign: 'center', fontWeight: 'bold' }}>
+                        ✓ Message sent successfully! I'll get back to you soon.
+                      </p>
+                    )}
+                    {formStatus === 'error' && (
+                      <p style={{ marginTop: '15px', color: '#ff4444', textAlign: 'center', fontWeight: 'bold' }}>
+                        ✗ Something went wrong. Please email me directly at andrewsabuda@gmail.com
+                      </p>
+                    )}
+                  </form>
                 </div>
                 <p className="timeline-note">
-                  This ensures your site can be planned, built, and launched quickly. Most projects go live within
-                  <strong> 48–72 hours</strong> after project approval and receipt of initial payment.
+                  Most projects go live within<strong> 48–72 hours</strong> after project approval and receipt of initial payment.
                 </p>
                 <p className="services-tagline">
                   <strong>Better websites. Lower costs. Fully managed from domain to deployment.</strong>

@@ -60,8 +60,8 @@ function App() {
         )}
         {showServices && (
           <ul className="nav-links">
-            <li><a href="#services">SERVICES</a></li>
             <li><a href="#process">PROCESS</a></li>
+            <li><a href="#guarantee">GUARANTEE</a></li>
             <li><a href="#pricing">PRICING</a></li>
             <li><a href="#getting-started">GET STARTED</a></li>
           </ul>
@@ -118,15 +118,18 @@ function App() {
             </div>
             <div className="about-text">
               <p className="retro-box">
-                Hey! I'm Andrew, a software engineer passionate about building full-stack applications
-                that solve real problems. I specialize in TypeScript, React, and Node.js, with a focus
-                on creating scalable, user-friendly web applications.
+                Hey! I'm Andrew, a full-stack software engineer passionate about building
+                applications that drive real business impact. With over 6 years of experience
+                in fintech and enterprise mobility management, I've led the development of
+                high-impact features that dramatically improved conversion rates and business outcomes.
                 <br /><br />
-                Currently working on Intuitive Fat Loss, a health and wellness app that helps people
-                achieve their fitness goals without the stress of obsessive tracking. I love combining
-                clean code with thoughtful UX design.
+                I specialize in React, TypeScript, and Node.js, with AWS cloud expertise.
+                Whether working with UX teams to refine requirements or building solutions
+                end-to-end in fast-paced startup environments, I thrive on solving complex
+                problems with clean, scalable code.
                 <br /><br />
-                <span className="neon-text">Let's build something awesome together!</span>
+                In my spare time, I build Agentic AI tools that help developers on my team
+                work smarter and faster.
               </p>
             </div>
           </div>
@@ -233,8 +236,10 @@ function App() {
           <h2 className="section-title">[ CONTACT.ME ]</h2>
           <div className="contact-content">
             <p className="hero-description">
-              Want to collaborate? Have a project idea? Looking for a software engineer?
-              Let's connect and build something great together!
+              Looking for a software engineer?
+            </p>
+            <p className="hero-description">
+              Let's connect!
             </p>
             <div className="contact-links">
               <a href="mailto:andrewsabuda@gmail.com" className="contact-link">
@@ -265,38 +270,22 @@ function App() {
 
           <section id="services" className="section grid-bg" style={{ minHeight: '100vh', paddingTop: '120px' }}>
             <div className="section-content">
-              <h2 className="section-title">[ SERVICES ]</h2>
-
               <div className="services-intro">
-                <div className="services-profile-image">
+                <div className="services-profile-image" style={{ margin: '30px 0' }}>
                   <img
                     src="/profile-photo.jpeg"
                     alt="Andrew Sabuda"
                     className="profile-photo pixelated"
                   />
                 </div>
-                <h3 className="services-subtitle">Done-For-You Personal Website Setup & Hosting</h3>
+                <h3 className="services-subtitle">Premium Custom Website Creation</h3>
                 <p className="services-description">
                   I provide fully managed personal and portfolio websites designed for professionals, freelancers, creators,
-                  and small businesses who want a clean, fast website without the technical headaches.
+                  and small businesses who want a clean, fast, fully customizable website without the technical headaches.
                 </p>
                 <p className="services-description">
                   Whether you need a brand-new site or want to move an existing website away from expensive or complex platforms
-                  (such as WordPress), I handle the entire process end-to-end:
-                </p>
-              </div>
-
-              <div className="services-features">
-                <ul className="services-list">
-                  <li>Website setup and deployment</li>
-                  <li>Domain connection and secure HTTPS configuration</li>
-                  <li>Migration of existing websites to lower-cost hosting</li>
-                  <li>Performance optimization for faster load times</li>
-                  <li>Ongoing hosting oversight and technical maintenance</li>
-                </ul>
-                <p className="services-note">
-                  Once your site is live, you won't need to manage plugins, hosting dashboards, updates, or security settings —
-                  everything is handled for you.
+                  (such as WordPress), I handle the entire process end-to-end.
                 </p>
               </div>
 
@@ -333,16 +322,33 @@ function App() {
                   </div>
 
                   <div className="process-step">
-                    <h4>Optional Maintenance</h4>
+                    <h4>Maintenance</h4>
                     <p>
-                      I can manage hosting and updates for you, keeping your site secure and hassle-free year after year.
+                      For a small annual payment, I manage hosting and updates for you, keeping your site secure and hassle-free year after year.
                     </p>
                   </div>
                 </div>
+              </div>
 
-                <p className="process-tagline">
-                  <strong>Simple. Fast. Fully managed.</strong> You only pay the final balance when you've approved your site.
-                </p>
+              <div id="guarantee" className="guarantee-section">
+                <h2 className="section-title">[ RISK-FREE GUARANTEE ]</h2>
+                <div className="guarantee-content retro-box" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                  <h3 style={{ marginBottom: '20px', color: 'var(--neon-green)' }}>Deposit & Refund Policy</h3>
+                  <p style={{ marginBottom: '15px' }}>
+                    A <strong>50% deposit</strong> is required to begin development.
+                  </p>
+                  <p style={{ marginBottom: '15px' }}>
+                    After the initial preview, you may choose to <strong>cancel the project and receive a full refund</strong> of the deposit,
+                    provided no additional revision work has been requested.
+                  </p>
+                  <p style={{ marginBottom: '15px' }}>
+                    Once revision requests or additional changes are requested after the preview, the deposit becomes non-refundable,
+                    and the project proceeds toward final delivery.
+                  </p>
+                  <p>
+                    <strong>Refunds are available for first-time customers only.</strong>
+                  </p>
+                </div>
               </div>
 
               <div id="pricing" className="pricing-section">
@@ -358,7 +364,7 @@ function App() {
                     </ul>
                     <div className="pricing-details">
                       <p><strong>Setup:</strong> $199</p>
-                      <p><strong>Maintenance & hosting oversight (optional):</strong> $99/year</p>
+                      <p><strong>Maintenance & hosting oversight:</strong> $50/year</p>
                     </div>
                   </div>
 
@@ -418,7 +424,7 @@ function App() {
                   <strong> 48–72 hours</strong> after project approval and receipt of initial payment.
                 </p>
                 <p className="services-tagline">
-                  <strong>Simple websites. Lower long-term costs. Fully managed from domain to deployment.</strong>
+                  <strong>Better websites. Lower costs. Fully managed from domain to deployment.</strong>
                 </p>
                 </div>
               </div>

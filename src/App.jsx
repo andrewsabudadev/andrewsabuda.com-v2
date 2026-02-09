@@ -572,6 +572,7 @@ function App() {
                         id="projectType"
                         name="projectType"
                         required
+                        defaultValue=""
                         style={{
                           width: '100%',
                           padding: '10px',
@@ -582,7 +583,7 @@ function App() {
                           fontFamily: 'monospace'
                         }}
                       >
-                        <option value="" disabled>Select one...</option>
+                        <option value="">Select one...</option>
                         <option value="starter">Starter Portfolio Website</option>
                         <option value="professional">Professional Website (up to 5 pages)</option>
                         <option value="migration">Website Migration</option>

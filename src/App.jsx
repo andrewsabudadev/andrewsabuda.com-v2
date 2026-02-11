@@ -188,16 +188,26 @@ function App() {
               </div>
             </a>
 
-            <div className="project-card">
-              <h3 className="project-title">MORE PROJECTS</h3>
-              <p className="project-description">
-                Currently focusing on Intuitive Fat Loss, but always exploring new ideas
-                and building side projects. Check back soon for more!
-              </p>
-              <div className="project-tags">
-                <span className="tag">COMING SOON</span>
+            <a href="https://lunalinks.io" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="project-card">
+                <h3 className="project-title">LUNALINKS</h3>
+                <p className="project-description">
+                  A customizable "link in bio" platform where users can create personalized profile pages
+                  with social media links. Features email authentication, real-time profile customization
+                  with live preview, custom color themes, image uploads, and support for 10+ social platforms.
+                </p>
+                <div className="project-tags">
+                  <span className="tag">REACT</span>
+                  <span className="tag">TYPESCRIPT</span>
+                  <span className="tag">NODE.JS</span>
+                  <span className="tag">EXPRESS</span>
+                  <span className="tag">AWS COGNITO</span>
+                  <span className="tag">DYNAMODB</span>
+                  <span className="tag">S3</span>
+                  <span className="tag">CLOUDFRONT</span>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </section>

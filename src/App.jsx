@@ -400,8 +400,8 @@ function App() {
                       <li>Domain connection and secure deployment</li>
                     </ul>
                     <div className="pricing-details">
-                      <p><strong>Setup:</strong> $199</p>
-                      <p><strong>Maintenance & hosting oversight:</strong> $50/year</p>
+                      <p><strong>Setup:</strong> $299</p>
+                      <p><strong>Maintenance & hosting oversight:</strong> $49/year</p>
                     </div>
                   </div>
 
@@ -413,7 +413,7 @@ function App() {
                       <li>SEO-ready structure</li>
                     </ul>
                     <div className="pricing-details">
-                      <p><strong>Setup:</strong> $399</p>
+                      <p><strong>Setup:</strong> $499</p>
                       <p><strong>Maintenance:</strong> $149/year</p>
                     </div>
                   </div>
